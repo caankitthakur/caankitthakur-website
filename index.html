@@ -164,6 +164,39 @@ section { position: relative; z-index: 1; scroll-margin-top: var(--nav-h); }
 .ticker-item .sep { color: var(--border2); font-size: 16px; font-weight: 300; }
 @keyframes tickerScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
+/* ── CAREER CHART CANVAS ── */
+#chartCanvas {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  pointer-events: none; z-index: 0; display: block;
+}
+.chart-live {
+  position: absolute; top: 14px; right: 1.8rem;
+  font-size: 9px; font-weight: 700; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--teal-400);
+  font-family: 'Courier New', monospace;
+  display: flex; align-items: center; gap: 6px;
+  z-index: 2; opacity: 0;
+  animation: fadeInDelay 0.5s ease forwards 0.8s;
+}
+.live-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--teal-400); box-shadow: 0 0 8px var(--teal-400);
+  animation: liveBlink 1.4s ease-in-out infinite;
+}
+@keyframes liveBlink {
+  0%,100%{ opacity:1; box-shadow: 0 0 8px var(--teal-400); }
+  50%    { opacity:0.3; box-shadow: none; }
+}
+@keyframes fadeInDelay { to { opacity: 1; } }
+.hero-name::after {
+  content: "|"; color: var(--purple-400); font-weight: 300; margin-left: 2px;
+  animation: cursorBlink 0.75s step-end infinite; opacity: 0;
+}
+.hero-name.typing::after { opacity: 1; }
+@keyframes cursorBlink { 0%,100%{opacity:1} 50%{opacity:0} }
+#heroName { animation: none !important; opacity: 0; min-height: 1.1em; }
+
 /* Landing hero content */
 .landing-body {
   flex: 1; display: flex; align-items: center;
@@ -569,6 +602,7 @@ section { position: relative; z-index: 1; scroll-margin-top: var(--nav-h); }
 
 <!-- ═══════════════ LANDING ═══════════════ -->
 <section id="home">
+  <canvas id="chartCanvas"></canvas>
 
   <!-- Ticker tape -->
   <div class="ticker-wrap">
@@ -606,22 +640,11 @@ section { position: relative; z-index: 1; scroll-margin-top: var(--nav-h); }
     <div class="l-deco2"></div>
     <div class="l-deco3"></div>
     <div class="l-watermark">AT</div>
-
-    <svg class="l-sparkline" viewBox="0 0 300 90" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <defs>
-        <linearGradient id="sparkGrad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%"   stop-color="#8b82ee" stop-opacity="0.5"/>
-          <stop offset="100%" stop-color="#8b82ee" stop-opacity="0"/>
-        </linearGradient>
-      </defs>
-      <polygon class="spark-area" points="0,90 0,72 36,62 68,67 98,52 128,57 158,40 185,44 212,27 245,31 300,16 300,90"/>
-      <polyline class="spark-line"  points="0,72 36,62 68,67 98,52 128,57 158,40 185,44 212,27 245,31 300,16"/>
-      <circle  class="spark-dot" cx="300" cy="16"/>
-    </svg>
+    <div class="chart-live"><div class="live-dot"></div> Career Trajectory</div>
 
     <div class="landing-inner">
       <div class="hero-eyebrow">A Decade in Finance</div>
-      <div class="hero-name">Ankit Thakur</div>
+      <div class="hero-name" id="heroName"></div>
       <div class="hero-subtitle">Chartered Accountant &nbsp;·&nbsp; CA (ICAI) &nbsp;·&nbsp; Bengaluru, India</div>
       <div class="hero-tagline">From articleship notebooks to boardroom decks — a decade building financial foundations for startups and global enterprises alike. Big4 discipline. Startup agility. One thread: making numbers tell the right story.</div>
 
@@ -1035,6 +1058,183 @@ section { position: relative; z-index: 1; scroll-margin-top: var(--nav-h); }
     if (scrollInd) scrollInd.style.opacity = window.scrollY > 80 ? '0' : '1';
   }, { passive: true });
 
+})();
+
+// ── Career Chart Canvas ──
+(function () {
+  var canvas = document.getElementById('chartCanvas');
+  if (!canvas) return;
+  var ctx = canvas.getContext('2d');
+
+  var milestones = [
+    { x: 0.00, y: 0.80, year: '2014' },
+    { x: 0.17, y: 0.68, year: '2017' },
+    { x: 0.27, y: 0.54, year: '2018' },
+    { x: 0.36, y: 0.45, year: '2019' },
+    { x: 0.45, y: 0.51, year: '2020' },
+    { x: 0.57, y: 0.39, year: '2022' },
+    { x: 0.67, y: 0.25, year: '2023' },
+    { x: 0.82, y: 0.19, year: '2024' },
+    { x: 1.00, y: 0.13, year: '2025' }
+  ];
+
+  var progress = 0, startTime = null, rafId = null;
+  var DURATION = 4200;
+
+  function resize() { canvas.width = canvas.offsetWidth; canvas.height = canvas.offsetHeight; }
+  function ease(t) { return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; }
+
+  function draw(ts) {
+    if (!startTime) startTime = ts;
+    progress = ease(Math.min((ts - startTime) / DURATION, 1));
+
+    var W = canvas.width, H = canvas.height;
+    var padX = Math.max(48, W * 0.06);
+    var topY  = H * 0.24, htY = H * 0.56;
+
+    ctx.clearRect(0, 0, W, H);
+
+    var pts = milestones.map(function (m) {
+      return { cx: padX + m.x * (W - padX*2), cy: topY + m.y * htY, year: m.year, x: m.x };
+    });
+
+    var n = pts.length - 1;
+    var sp = progress * n;
+    var seg = Math.min(Math.floor(sp), n - 1);
+    var t = sp - seg;
+    var p0 = pts[seg], p1 = pts[Math.min(seg + 1, n)];
+    var cx = p0.cx + (p1.cx - p0.cx) * t;
+    var cy = p0.cy + (p1.cy - p0.cy) * t;
+
+    // Horizontal grid lines
+    for (var g = 0; g <= 4; g++) {
+      ctx.beginPath();
+      ctx.strokeStyle = 'rgba(139,130,238,0.04)';
+      ctx.lineWidth = 1; ctx.setLineDash([3,10]);
+      ctx.moveTo(padX, topY + (g/4)*htY);
+      ctx.lineTo(W - padX, topY + (g/4)*htY);
+      ctx.stroke();
+    }
+    ctx.setLineDash([]);
+
+    // Secondary faint lines
+    [{off: htY*0.09, a: 0.07}, {off: htY*0.17, a: 0.04}].forEach(function (bg) {
+      ctx.beginPath();
+      ctx.strokeStyle = 'rgba(139,130,238,' + bg.a + ')';
+      ctx.lineWidth = 1.5;
+      pts.forEach(function (p, i) {
+        var atEdge = p.x <= pts[seg].x + (pts[Math.min(seg+1,n)].x - pts[seg].x)*t + 0.001;
+        if (i === 0) ctx.moveTo(p.cx, p.cy + bg.off);
+        else if (atEdge) ctx.lineTo(p.cx, p.cy + bg.off);
+      });
+      ctx.lineTo(cx, cy + bg.off);
+      ctx.stroke();
+    });
+
+    // Gradient fill
+    var grad = ctx.createLinearGradient(0, topY, 0, topY + htY);
+    grad.addColorStop(0, 'rgba(139,130,238,0.22)');
+    grad.addColorStop(0.6, 'rgba(139,130,238,0.06)');
+    grad.addColorStop(1, 'rgba(139,130,238,0.00)');
+    ctx.beginPath();
+    ctx.moveTo(pts[0].cx, topY + htY);
+    ctx.lineTo(pts[0].cx, pts[0].cy);
+    for (var i = 1; i <= seg; i++) ctx.lineTo(pts[i].cx, pts[i].cy);
+    ctx.lineTo(cx, cy); ctx.lineTo(cx, topY + htY);
+    ctx.closePath(); ctx.fillStyle = grad; ctx.fill();
+
+    // Main glowing line
+    ctx.shadowColor = 'rgba(139,130,238,0.6)'; ctx.shadowBlur = 18;
+    ctx.beginPath();
+    ctx.strokeStyle = 'rgba(139,130,238,0.90)';
+    ctx.lineWidth = 2.5; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+    ctx.moveTo(pts[0].cx, pts[0].cy);
+    for (var i = 1; i <= seg; i++) ctx.lineTo(pts[i].cx, pts[i].cy);
+    ctx.lineTo(cx, cy); ctx.stroke(); ctx.shadowBlur = 0;
+
+    // Milestone dots + year labels
+    pts.forEach(function (p, i) {
+      var pp = i / n;
+      if (pp > progress + 0.02) return;
+      var alpha = Math.min((progress - pp) * n * 2.5, 1);
+      if (alpha <= 0) return;
+      ctx.setLineDash([2,6]);
+      ctx.beginPath();
+      ctx.strokeStyle = 'rgba(139,130,238,' + (alpha*0.14) + ')';
+      ctx.lineWidth = 1;
+      ctx.moveTo(p.cx, p.cy); ctx.lineTo(p.cx, topY + htY);
+      ctx.stroke(); ctx.setLineDash([]);
+      ctx.beginPath();
+      ctx.arc(p.cx, p.cy, 4, 0, Math.PI*2);
+      ctx.fillStyle = 'rgba(46,201,144,' + alpha + ')';
+      ctx.shadowColor = 'rgba(46,201,144,0.7)'; ctx.shadowBlur = 10;
+      ctx.fill(); ctx.shadowBlur = 0;
+      ctx.font = '600 10px Courier New';
+      ctx.fillStyle = 'rgba(110,108,136,' + alpha + ')';
+      ctx.textAlign = 'center';
+      ctx.fillText(p.year, p.cx, topY + htY + 17);
+    });
+
+    // Glowing tip dot + pulse ring
+    ctx.beginPath(); ctx.arc(cx, cy, 5.5, 0, Math.PI*2);
+    ctx.fillStyle = '#9088f0';
+    ctx.shadowColor = 'rgba(139,130,238,1)'; ctx.shadowBlur = 28;
+    ctx.fill(); ctx.shadowBlur = 0;
+    var pr = 9 + Math.sin(ts / 280) * 3.5;
+    ctx.beginPath(); ctx.arc(cx, cy, pr, 0, Math.PI*2);
+    ctx.strokeStyle = 'rgba(139,130,238,0.28)'; ctx.lineWidth = 1.5; ctx.stroke();
+
+    if (progress < 1) {
+      rafId = requestAnimationFrame(draw);
+    } else {
+      // Settled state — keep pulsing end dot + show label
+      (function pulse(ts2) {
+        var lp = pts[pts.length - 1];
+        ctx.clearRect(lp.cx - 32, lp.cy - 32, 210, 64);
+        ctx.beginPath(); ctx.arc(lp.cx, lp.cy, 5.5, 0, Math.PI*2);
+        ctx.fillStyle = '#9088f0';
+        ctx.shadowColor = 'rgba(139,130,238,1)'; ctx.shadowBlur = 28;
+        ctx.fill(); ctx.shadowBlur = 0;
+        var pr2 = 9 + Math.sin(ts2/280)*3.5;
+        ctx.beginPath(); ctx.arc(lp.cx, lp.cy, pr2, 0, Math.PI*2);
+        ctx.strokeStyle = 'rgba(139,130,238,0.28)'; ctx.lineWidth = 1.5; ctx.stroke();
+        ctx.font = 'bold 10px Courier New';
+        ctx.fillStyle = 'rgba(46,201,144,0.92)';
+        ctx.textAlign = 'left';
+        ctx.fillText('◆ ShopOS · Now', lp.cx + 13, lp.cy + 4);
+        requestAnimationFrame(pulse);
+      })(ts);
+    }
+  }
+
+  function start() {
+    if (rafId) cancelAnimationFrame(rafId);
+    startTime = null; progress = 0;
+    resize();
+    rafId = requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize', start, { passive: true });
+  setTimeout(start, 250);
+})();
+
+// ── Typewriter effect on name ──
+(function () {
+  var el = document.getElementById('heroName');
+  if (!el) return;
+  var text = 'Ankit Thakur';
+  el.textContent = ''; el.style.opacity = '1';
+  el.classList.add('typing');
+  var i = 0;
+  setTimeout(function () {
+    var timer = setInterval(function () {
+      if (i < text.length) { el.textContent += text[i++]; }
+      else {
+        clearInterval(timer);
+        setTimeout(function () { el.classList.remove('typing'); }, 1500);
+      }
+    }, 88);
+  }, 950);
 })();
 </script>
 </body>
