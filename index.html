@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ankit Thakur — The Journey</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+:root {
+  --purple-50: #1e1c35;
+  --purple-100: #2d2a4a;
+  --purple-200: #4a4480;
+  --purple-400: #9088f0;
+  --purple-600: #8b82ee;
+  --purple-800: #c4bfff;
+  --purple-900: #e2e0ff;
+  --teal-50: #0d2820;
+  --teal-400: #2ec990;
+  --teal-800: #9ef0d0;
+  --coral-50: #2a1510;
+  --coral-400: #f07258;
+  --coral-800: #ffb8a8;
+  --amber-50: #271c08;
+  --amber-400: #e8a030;
+  --amber-800: #ffd080;
+  --blue-50: #0d1e33;
+  --blue-400: #5a9ae0;
+  --blue-800: #a8d0ff;
+  --gray-50: #1a1a28;
+  --gray-400: #9090a8;
+  --bg: #0d0c1a;
+  --surface: #16142a;
+  --surface2: #1e1c30;
+  --text: #e8e6f8;
+  --text2: #b0adc8;
+  --text3: #6e6c88;
+  --border: rgba(139,130,238,0.18);
+  --border2: rgba(139,130,238,0.32);
+  --nav-h: 62px;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* Animated background grid */
+body::before {
+  content: "";
+  position: fixed; inset: 0;
+  background-image:
+    linear-gradient(rgba(139,130,238,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(139,130,238,0.03) 1px, transparent 1px);
+  background-size: 48px 48px;
+  animation: gridDrift 28s linear infinite;
+  pointer-events: none; z-index: 0;
+}
+@keyframes gridDrift { to { background-position: 48px 48px; } }
+
+/* ── NAVBAR ── */
+.navbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  height: var(--nav-h);
+  background: rgba(13,12,26,0.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid transparent;
+  transition: background 0.4s, border-color 0.4s;
+}
+.navbar.scrolled {
+  background: rgba(13,12,26,0.92);
+  border-color: var(--border);
+}
+.nav-inner {
+  max-width: 980px; margin: 0 auto;
+  height: 100%; padding: 0 1.5rem;
+  display: flex; align-items: center; gap: 2rem;
+}
+.nav-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px; font-weight: 700;
+  color: var(--purple-900); text-decoration: none;
+  letter-spacing: -0.5px;
+  flex-shrink: 0;
+}
+.nav-logo span { color: var(--purple-600); }
+.nav-links {
+  display: flex; align-items: center; gap: 0.25rem;
+  margin-left: auto;
+}
+.nav-link {
+  font-size: 13px; font-weight: 500; color: var(--text3);
+  text-decoration: none; padding: 6px 12px; border-radius: 8px;
+  transition: color 0.2s, background 0.2s;
+  white-space: nowrap;
+}
+.nav-link:hover { color: var(--purple-800); background: var(--purple-50); }
+.nav-link.active { color: var(--purple-400); background: var(--purple-50); }
+
+/* Hamburger */
+.nav-toggle {
+  display: none; flex-direction: column; justify-content: center;
+  gap: 5px; width: 36px; height: 36px; background: none;
+  border: none; cursor: pointer; margin-left: auto; padding: 4px;
+}
+.nav-toggle span {
+  display: block; height: 2px; border-radius: 2px;
+  background: var(--text2); transition: transform 0.3s, opacity 0.3s;
+}
+.nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-toggle.open span:nth-child(2) { opacity: 0; }
+.nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ── SECTION BASE ── */
+section { position: relative; z-index: 1; scroll-margin-top: var(--nav-h); }
+.sec-wrap { max-width: 920px; margin: 0 auto; padding: 5rem 1.5rem; }
+
+/* ── SECTION HEADER ── */
+.section-header {
+  font-size: 10px; font-weight: 600; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--purple-600);
+  margin-bottom: 1.2rem; display: flex; align-items: center; gap: 8px;
+}
+.section-header::after { content: ""; flex: 1; height: 1px; background: var(--purple-100); }
+
+/* ── LANDING SECTION ── */
+#home {
+  min-height: 100vh;
+  background: linear-gradient(160deg, #1c1a38 0%, #0d0c1a 55%, #13112c 100%);
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+
+/* Ticker tape */
+.ticker-wrap {
+  overflow: hidden; height: 36px; flex-shrink: 0;
+  background: rgba(22,20,42,0.8); border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; position: relative;
+  margin-top: var(--nav-h);
+}
+.ticker-wrap::before, .ticker-wrap::after {
+  content: ""; position: absolute; top: 0; bottom: 0; width: 56px; z-index: 2;
+}
+.ticker-wrap::before { left: 0; background: linear-gradient(to right, rgba(22,20,42,0.95), transparent); }
+.ticker-wrap::after  { right: 0; background: linear-gradient(to left,  rgba(22,20,42,0.95), transparent); }
+.ticker { display: flex; white-space: nowrap; animation: tickerScroll 50s linear infinite; }
+.ticker-item {
+  font-size: 11px; font-weight: 600;
+  font-family: 'Courier New', monospace;
+  letter-spacing: 0.06em; color: var(--text3);
+  padding: 0 18px; display: flex; align-items: center; gap: 5px;
+}
+.ticker-item .hi  { color: var(--purple-400); }
+.ticker-item .up  { color: var(--teal-400); font-size: 10px; }
+.ticker-item .sep { color: var(--border2); font-size: 16px; font-weight: 300; }
+@keyframes tickerScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+/* Landing hero content */
+.landing-body {
+  flex: 1; display: flex; align-items: center;
+  padding: 3rem 1.5rem 2rem;
+  position: relative;
+}
+.landing-inner {
+  max-width: 920px; margin: 0 auto; width: 100%;
+  position: relative; z-index: 1;
+}
+/* Decorative circles */
+.l-deco  { position: absolute; top: -80px; right: -80px; width: 280px; height: 280px; border-radius: 50%; background: var(--purple-100); opacity: 0.22; pointer-events: none; }
+.l-deco2 { position: absolute; bottom: -60px; right: 120px; width: 180px; height: 180px; border-radius: 50%; background: var(--purple-200); opacity: 0.12; pointer-events: none; }
+.l-deco3 { position: absolute; top: 40px; left: -40px; width: 120px; height: 120px; border-radius: 50%; background: var(--purple-100); opacity: 0.14; pointer-events: none; }
+/* Watermark */
+.l-watermark {
+  position: absolute; right: -10px; top: 50%; transform: translateY(-50%);
+  font-family: 'Playfair Display', serif;
+  font-size: 220px; font-weight: 700; letter-spacing: -14px;
+  color: rgba(139,130,238,0.05); line-height: 1;
+  user-select: none; pointer-events: none;
+}
+/* Sparkline */
+.l-sparkline {
+  position: absolute; right: 0; bottom: 0;
+  width: 300px; height: 90px;
+  opacity: 0; pointer-events: none;
+  animation: sparkFadeIn 0.6s ease forwards 3.2s;
+}
+.spark-line {
+  fill: none; stroke: var(--purple-400); stroke-width: 2.5;
+  stroke-linecap: round; stroke-linejoin: round;
+  stroke-dasharray: 800; stroke-dashoffset: 800;
+  animation: drawSpark 2.8s ease forwards 0.7s;
+}
+.spark-area { fill: url(#sparkGrad); opacity: 0; animation: areaFade 0.8s ease forwards 3.4s; }
+.spark-dot  { fill: var(--teal-400); opacity: 0; r: 0; animation: dotPop 0.4s cubic-bezier(0.34,1.56,0.64,1) forwards 3.3s; }
+@keyframes drawSpark  { to { stroke-dashoffset: 0; } }
+@keyframes areaFade   { to { opacity: 0.45; } }
+@keyframes dotPop     { to { opacity: 1; r: 5; } }
+@keyframes sparkFadeIn{ to { opacity: 0.15; } }
+
+.hero-eyebrow {
+  font-size: 11px; font-weight: 600; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--teal-400);
+  margin-bottom: 14px; display: flex; align-items: center; gap: 8px;
+  animation: fadeUp 0.8s ease both 0.2s;
+}
+.hero-eyebrow::before { content: ""; width: 28px; height: 2px; background: var(--teal-400); border-radius: 2px; }
+.hero-name {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(42px, 7vw, 68px);
+  font-weight: 700; color: var(--purple-900);
+  line-height: 1.05; margin-bottom: 12px; letter-spacing: -1.5px;
+  animation: fadeUp 0.8s ease both 0.35s;
+}
+.hero-subtitle {
+  font-size: 15px; color: var(--purple-600); font-weight: 500;
+  margin-bottom: 18px;
+  animation: fadeUp 0.8s ease both 0.5s;
+}
+.hero-tagline {
+  font-size: 14.5px; color: var(--text2); line-height: 1.8;
+  max-width: 520px; margin-bottom: 28px;
+  animation: fadeUp 0.8s ease both 0.65s;
+}
+
+/* CTA buttons */
+.cta-row {
+  display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 28px;
+  animation: fadeUp 0.8s ease both 0.8s;
+}
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--purple-600); color: #fff;
+  font-size: 14px; font-weight: 600; font-family: 'Inter', sans-serif;
+  border-radius: 12px; padding: 13px 26px;
+  text-decoration: none; border: none; cursor: pointer;
+  transition: background 0.2s, transform 0.25s, box-shadow 0.25s;
+}
+.btn-primary:hover { background: var(--purple-400); transform: translateY(-3px); box-shadow: 0 10px 28px rgba(139,130,238,0.40); }
+.btn-secondary {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: transparent; color: var(--purple-800);
+  font-size: 14px; font-weight: 600; font-family: 'Inter', sans-serif;
+  border-radius: 12px; padding: 13px 26px;
+  text-decoration: none; border: 1px solid var(--purple-200); cursor: pointer;
+  transition: background 0.2s, transform 0.25s, box-shadow 0.25s;
+}
+.btn-secondary:hover { background: var(--purple-50); transform: translateY(-3px); box-shadow: 0 6px 18px rgba(139,130,238,0.18); }
+
+/* Contact pills */
+.contact-pills {
+  display: flex; flex-wrap: wrap; gap: 8px;
+  animation: fadeUp 0.8s ease both 0.95s;
+}
+.pill {
+  display: flex; align-items: center; gap: 5px;
+  font-size: 12px; color: var(--purple-800);
+  background: rgba(255,255,255,0.06); border: 1px solid var(--purple-200);
+  border-radius: 20px; padding: 5px 13px; font-weight: 500;
+  transition: background 0.2s, transform 0.2s; cursor: default;
+}
+.pill:hover { background: rgba(255,255,255,0.10); transform: translateY(-1px); }
+.pill i { font-size: 14px; color: var(--purple-600); }
+
+/* Mini stats bar inside landing */
+.landing-stats {
+  display: flex; gap: 2rem; flex-wrap: wrap;
+  padding: 1.2rem 1.5rem; margin-top: 2rem;
+  background: rgba(22,20,42,0.7); border-top: 1px solid var(--border);
+  animation: fadeUp 0.8s ease both 1.1s;
+}
+.lst { text-align: center; flex: 1; min-width: 80px; }
+.lst-num { font-size: 22px; font-weight: 700; color: var(--purple-600); font-family: 'Playfair Display', serif; }
+.lst-lbl { font-size: 10px; color: var(--text3); margin-top: 2px; }
+
+/* Scroll indicator */
+.scroll-ind {
+  position: absolute; bottom: 5.5rem; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  color: var(--text3); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+  animation: scrollBounce 2.2s ease-in-out infinite, fadeUp 0.8s ease both 1.4s;
+  cursor: pointer; text-decoration: none;
+  z-index: 2;
+}
+.scroll-ind i { font-size: 22px; }
+@keyframes scrollBounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50%       { transform: translateX(-50%) translateY(9px); }
+}
+
+/* ── STORY SECTION ── */
+#story { background: var(--bg); }
+
+.origin-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 16px; padding: 2rem;
+  display: grid; grid-template-columns: 200px 1fr; gap: 2rem; align-items: center;
+  margin-bottom: 1.5rem;
+  opacity: 0; transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease, box-shadow 0.3s, border-color 0.3s;
+}
+.origin-card.in-view { opacity: 1; transform: translateY(0); }
+.origin-card:hover   { box-shadow: 0 10px 36px rgba(139,130,238,0.14); border-color: var(--border2); }
+.origin-label { font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--purple-600); margin-bottom: 8px; }
+.origin-headline { font-family: 'Playfair Display', serif; font-size: 24px; color: var(--purple-900); line-height: 1.3; }
+.origin-text { font-size: 13.5px; color: var(--text2); line-height: 1.85; }
+.origin-text strong { color: var(--text); font-weight: 600; }
+
+/* Stats */
+.stat-row { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; }
+.stat {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 14px; padding: 1.2rem; text-align: center;
+  opacity: 0; cursor: default;
+  animation: fadeUp 0.65s cubic-bezier(0.22,1,0.36,1) forwards;
+  transition: box-shadow 0.3s, transform 0.3s;
+}
+.stat:nth-child(1) { animation-delay: 0.1s; }
+.stat:nth-child(2) { animation-delay: 0.2s; }
+.stat:nth-child(3) { animation-delay: 0.3s; }
+.stat:nth-child(4) { animation-delay: 0.4s; }
+.stat.triggered { animation-play-state: running; }
+.stat:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(139,130,238,0.22); }
+.stat-num { font-size: 30px; font-weight: 700; color: var(--purple-600); font-family: 'Playfair Display', serif; transition: color 0.3s; }
+.stat-lbl { font-size: 11px; color: var(--text3); margin-top: 4px; line-height: 1.4; }
+.stat:hover .stat-num { color: var(--purple-400); }
+
+/* ── MILESTONES SECTION ── */
+#milestones { background: var(--surface2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+
+.milestones-scroll {
+  display: flex; gap: 10px; overflow-x: auto; padding-bottom: 8px;
+  scrollbar-width: thin; scrollbar-color: var(--purple-200) transparent;
+}
+.milestones-scroll::-webkit-scrollbar { height: 4px; }
+.milestones-scroll::-webkit-scrollbar-thumb { background: var(--purple-200); border-radius: 4px; }
+.milestone {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 12px; padding: 14px 16px; min-width: 162px; flex-shrink: 0;
+  transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s; cursor: default;
+}
+.milestone:hover { border-color: var(--border2); transform: translateY(-3px); box-shadow: 0 6px 20px rgba(139,130,238,0.18); }
+.m-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--purple-600); margin-bottom: 8px; }
+.m-dot.teal  { background: var(--teal-400); }
+.m-dot.coral { background: var(--coral-400); }
+.m-dot.amber { background: var(--amber-400); }
+.m-dot.blue  { background: var(--blue-400); }
+.m-year { font-size: 11px; font-weight: 600; color: var(--purple-600); font-family: 'Courier New', monospace; margin-bottom: 4px; }
+.m-text { font-size: 12px; color: var(--text2); line-height: 1.5; }
+
+/* ── JOURNEY SECTION ── */
+#journey { background: var(--bg); }
+
+.chapter-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 18px; padding: 2rem; margin-bottom: 1.25rem;
+  position: relative; overflow: hidden;
+  opacity: 0; transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease, box-shadow 0.3s, border-color 0.3s;
+}
+.chapter-card:last-child { margin-bottom: 0; }
+.chapter-card.in-view { opacity: 1; transform: translateY(0); }
+.chapter-card:hover   { box-shadow: 0 12px 44px rgba(139,130,238,0.15); border-color: var(--border2); }
+.chapter-card::before {
+  content: ""; position: absolute; left: 0; top: 0; bottom: 0;
+  width: 4px; border-radius: 18px 0 0 18px;
+  background: var(--purple-600);
+}
+.chapter-card.c-blue::before  { background: var(--blue-400); }
+.chapter-card.c-coral::before { background: var(--coral-400); }
+.chapter-card.c-amber::before { background: var(--amber-400); }
+.chapter-card.c-teal::before  { background: var(--teal-400); }
+.chapter-card.c-gray::before  { background: var(--gray-400); }
+.ch-bg-num {
+  position: absolute; right: 20px; top: 50%; transform: translateY(-50%);
+  font-family: 'Playfair Display', serif; font-size: 120px; font-weight: 700;
+  line-height: 1; color: rgba(139,130,238,0.05); user-select: none; pointer-events: none;
+}
+.ch-inner { position: relative; z-index: 1; }
+.ch-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-bottom: 1rem; }
+.ch-num   { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text3); font-family: 'Courier New', monospace; margin-bottom: 4px; }
+.ch-title { font-family: 'Playfair Display', serif; font-size: 22px; color: var(--text); margin-bottom: 3px; }
+.ch-co    { font-size: 13px; color: var(--purple-600); font-weight: 500; }
+.ch-co i  { font-size: 13px; margin-right: 3px; }
+.ch-period {
+  font-size: 11px; color: var(--text3); font-family: 'Courier New', monospace;
+  background: var(--surface2); border: 1px solid var(--border);
+  border-radius: 6px; padding: 3px 10px; white-space: nowrap; align-self: flex-start;
+}
+.ch-story {
+  font-size: 13.5px; color: var(--text2); line-height: 1.8; margin-bottom: 14px;
+  border-left: 2px solid var(--purple-100); padding-left: 14px; font-style: italic;
+  max-width: 680px;
+}
+.ch-highlights {
+  list-style: none; display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 5px; margin-bottom: 14px;
+}
+.ch-highlights li { font-size: 12px; color: var(--text2); line-height: 1.55; padding-left: 16px; position: relative; }
+.ch-highlights li::before { content: "›"; position: absolute; left: 0; color: var(--purple-400); font-weight: 700; }
+.ch-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.ctag {
+  font-size: 11px; font-weight: 500; border-radius: 6px; padding: 3px 10px; cursor: default;
+  background: var(--purple-50); color: var(--purple-800);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.ctag.t { background: var(--teal-50);  color: var(--teal-800); }
+.ctag.c { background: var(--coral-50); color: var(--coral-800); }
+.ctag.a { background: var(--amber-50); color: var(--amber-800); }
+.ctag.b { background: var(--blue-50);  color: var(--blue-800); }
+.ctag.g { background: var(--gray-50);  color: var(--gray-400); }
+.ctag:hover { transform: translateY(-2px); box-shadow: 0 3px 10px rgba(0,0,0,0.22); }
+
+/* ── SKILLS SECTION ── */
+#skills { background: var(--surface2); border-top: 1px solid var(--border); }
+
+.bottom-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 1.25rem; }
+.card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 16px; padding: 1.5rem;
+  opacity: 0; transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease, box-shadow 0.3s, border-color 0.3s;
+}
+.card.in-view { opacity: 1; transform: translateY(0); }
+.card:hover   { box-shadow: 0 10px 36px rgba(139,130,238,0.14); border-color: var(--border2); }
+.sec-label {
+  font-size: 10px; font-weight: 600; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--purple-600);
+  margin-bottom: 1.1rem; display: flex; align-items: center; gap: 6px;
+}
+.sec-label::after { content: ""; flex: 1; height: 1px; background: var(--purple-100); transform-origin: left; transform: scaleX(0); transition: transform 0.7s ease 0.2s; }
+.card.in-view .sec-label::after { transform: scaleX(1); }
+
+.edu-item { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 1rem; transition: transform 0.25s; }
+.edu-item:last-child { margin-bottom: 0; }
+.edu-item:hover { transform: translateX(4px); }
+.edu-icon { width: 40px; height: 40px; border-radius: 10px; background: var(--purple-50); border: 1px solid var(--purple-100); display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: background 0.25s, border-color 0.25s; }
+.edu-icon i { font-size: 18px; color: var(--purple-600); }
+.edu-item:hover .edu-icon { background: var(--purple-100); border-color: var(--purple-200); }
+.edu-deg  { font-size: 13px; font-weight: 600; color: var(--text); }
+.edu-sch  { font-size: 12px; color: var(--purple-600); margin-top: 1px; }
+.edu-meta { font-size: 11px; color: var(--text3); margin-top: 2px; }
+
+.skill-group { margin-bottom: 11px; }
+.skill-group:last-child { margin-bottom: 0; }
+.skill-name { font-size: 12px; color: var(--text2); margin-bottom: 5px; display: flex; justify-content: space-between; }
+.skill-pct { font-weight: 600; color: var(--purple-600); }
+.bar-bg { height: 6px; background: var(--surface2); border-radius: 4px; overflow: hidden; }
+.bar-fill { height: 100%; border-radius: 4px; background: var(--purple-600); width: 0 !important; transition: width 1.35s cubic-bezier(0.25,0.46,0.45,0.94); }
+.bar-fill.teal  { background: var(--teal-400); }
+.bar-fill.coral { background: var(--coral-400); }
+.bar-fill.blue  { background: var(--blue-400); }
+.bar-fill.amber { background: var(--amber-400); }
+
+.int-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.int-tag {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 12px; background: var(--surface2); border: 1px solid var(--border);
+  border-radius: 10px; padding: 7px 14px; color: var(--text2); font-weight: 500;
+  transition: transform 0.2s, box-shadow 0.2s; cursor: default;
+}
+.int-tag i { color: var(--purple-600); font-size: 16px; }
+.int-tag:hover { transform: translateY(-2px); box-shadow: 0 4px 14px rgba(0,0,0,0.22); }
+
+/* ── CONNECT SECTION ── */
+#connect { background: var(--bg); border-top: 1px solid var(--border); }
+
+.next-card {
+  background: linear-gradient(135deg, #1c1a32 0%, var(--surface) 100%);
+  border: 1px dashed var(--purple-200); border-radius: 16px;
+  padding: 2rem; margin-bottom: 2rem;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: start;
+  opacity: 0; transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.next-card.in-view { opacity: 1; transform: translateY(0); }
+.next-eyebrow { font-size: 10px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--teal-400); margin-bottom: 8px; }
+.next-title { font-family: 'Playfair Display', serif; font-size: 22px; color: var(--purple-900); margin-bottom: 12px; }
+.next-text { font-size: 13px; color: var(--text2); line-height: 1.75; }
+.next-goals { list-style: none; }
+.next-goals li { font-size: 13px; color: var(--text2); line-height: 1.65; padding-left: 20px; position: relative; margin-bottom: 10px; }
+.next-goals li::before { content: "→"; position: absolute; left: 0; color: var(--teal-400); font-weight: 600; }
+.next-goals li strong { color: var(--text); font-weight: 600; }
+
+/* Connect cards */
+.connect-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; margin-bottom: 2rem; }
+.connect-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 14px; padding: 1.2rem;
+  display: flex; align-items: center; gap: 12px;
+  text-decoration: none; color: var(--text);
+  transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+  opacity: 0; transform: translateY(16px);
+  transition: opacity 0.5s ease, transform 0.5s ease, border-color 0.2s, box-shadow 0.2s;
+}
+.connect-card.in-view { opacity: 1; transform: translateY(0); }
+.connect-card:hover { border-color: var(--border2); transform: translateY(-3px); box-shadow: 0 8px 24px rgba(139,130,238,0.18); }
+.cc-icon { width: 40px; height: 40px; border-radius: 10px; background: var(--purple-50); border: 1px solid var(--purple-100); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.cc-icon i { font-size: 20px; color: var(--purple-600); }
+.cc-label { font-size: 11px; color: var(--text3); margin-bottom: 2px; }
+.cc-value { font-size: 13px; font-weight: 500; color: var(--text); }
+
+.footer { text-align: center; font-size: 12px; color: var(--text3); padding-top: 1.5rem; border-top: 1px solid var(--border); }
+
+/* ── KEYFRAMES ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── MOBILE NAV ── */
+@media (max-width: 700px) {
+  .nav-toggle { display: flex; }
+  .nav-links {
+    display: none; position: fixed;
+    top: var(--nav-h); left: 0; right: 0;
+    background: rgba(13,12,26,0.97);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    flex-direction: column; gap: 0; padding: 0.5rem 1rem 1rem;
+  }
+  .nav-links.open { display: flex; }
+  .nav-link { padding: 12px 8px; border-radius: 8px; }
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 640px) {
+  .hero-name  { font-size: 38px; }
+  .l-watermark { font-size: 120px; }
+  .l-sparkline { display: none; }
+  .stat-row    { grid-template-columns: repeat(2,1fr); }
+  .origin-card { grid-template-columns: 1fr; }
+  .bottom-grid { grid-template-columns: 1fr; }
+  .next-card   { grid-template-columns: 1fr; }
+  .connect-grid{ grid-template-columns: repeat(2,1fr); }
+  .ch-highlights { grid-template-columns: 1fr; }
+  .landing-stats { gap: 1rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════ NAVBAR ═══════════════ -->
+<nav class="navbar" id="navbar">
+  <div class="nav-inner">
+    <a href="#home" class="nav-logo">Ankit <span>Thakur</span></a>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav-links" id="navLinks">
+      <a href="#home"       class="nav-link active">Home</a>
+      <a href="#story"      class="nav-link">My Story</a>
+      <a href="#milestones" class="nav-link">Milestones</a>
+      <a href="#journey"    class="nav-link">Journey</a>
+      <a href="#skills"     class="nav-link">Skills</a>
+      <a href="#connect"    class="nav-link">Connect</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══════════════ LANDING ═══════════════ -->
+<section id="home">
+
+  <!-- Ticker tape -->
+  <div class="ticker-wrap">
+    <div class="ticker">
+      <span class="ticker-item"><span class="hi">CA (ICAI)</span><span class="sep">|</span></span>
+      <span class="ticker-item"><span class="up">▲</span> KPMG Alumni<span class="sep">|</span></span>
+      <span class="ticker-item">7+ Yrs Experience<span class="sep">|</span></span>
+      <span class="ticker-item"><span class="up">▲</span> Ind AS / IFRS<span class="sep">|</span></span>
+      <span class="ticker-item"><span class="hi">SEBI ICDR / DRHP</span><span class="sep">|</span></span>
+      <span class="ticker-item"><span class="up">▲</span> IPO Preparation<span class="sep">|</span></span>
+      <span class="ticker-item">Oracle ERP · SAP<span class="sep">|</span></span>
+      <span class="ticker-item"><span class="hi">MIS Design</span><span class="sep">|</span></span>
+      <span class="ticker-item"><span class="up">▲</span> Merger &amp; Acquisition<span class="sep">|</span></span>
+      <span class="ticker-item">Big4 Background<span class="sep">|</span></span>
+      <span class="ticker-item"><span class="hi">Investor Relations</span><span class="sep">|</span></span>
+      <span class="ticker-item"><span class="up">▲</span> 3 Countries Worked<span class="sep">|</span></span>
+      <span class="ticker-item"><span class="hi">CA (ICAI)</span><span class="sep">|</span></span>
+      <span class="ticker-item"><span class="up">▲</span> KPMG Alumni<span class="sep">|</span></span>
+      <span class="ticker-item">7+ Yrs Experience<span class="sep">|</span></span>
+      <span class="ticker-item"><span class="up">▲</span> Ind AS / IFRS<span class="sep">|</span></span>
+      <span class="ticker-item"><span class="hi">SEBI ICDR / DRHP</span><span class="sep">|</span></span>
+      <span class="ticker-item"><span class="up">▲</span> IPO Preparation<span class="sep">|</span></span>
+      <span class="ticker-item">Oracle ERP · SAP<span class="sep">|</span></span>
+      <span class="ticker-item"><span class="hi">MIS Design</span><span class="sep">|</span></span>
+      <span class="ticker-item"><span class="up">▲</span> Merger &amp; Acquisition<span class="sep">|</span></span>
+      <span class="ticker-item">Big4 Background<span class="sep">|</span></span>
+      <span class="ticker-item"><span class="hi">Investor Relations</span><span class="sep">|</span></span>
+      <span class="ticker-item"><span class="up">▲</span> 3 Countries Worked<span class="sep">|</span></span>
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <div class="landing-body">
+    <div class="l-deco"></div>
+    <div class="l-deco2"></div>
+    <div class="l-deco3"></div>
+    <div class="l-watermark">AT</div>
+
+    <svg class="l-sparkline" viewBox="0 0 300 90" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs>
+        <linearGradient id="sparkGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%"   stop-color="#8b82ee" stop-opacity="0.5"/>
+          <stop offset="100%" stop-color="#8b82ee" stop-opacity="0"/>
+        </linearGradient>
+      </defs>
+      <polygon class="spark-area" points="0,90 0,72 36,62 68,67 98,52 128,57 158,40 185,44 212,27 245,31 300,16 300,90"/>
+      <polyline class="spark-line"  points="0,72 36,62 68,67 98,52 128,57 158,40 185,44 212,27 245,31 300,16"/>
+      <circle  class="spark-dot" cx="300" cy="16"/>
+    </svg>
+
+    <div class="landing-inner">
+      <div class="hero-eyebrow">A Decade in Finance</div>
+      <div class="hero-name">Ankit Thakur</div>
+      <div class="hero-subtitle">Chartered Accountant &nbsp;·&nbsp; CA (ICAI) &nbsp;·&nbsp; Bengaluru, India</div>
+      <div class="hero-tagline">From articleship notebooks to boardroom decks — a decade building financial foundations for startups and global enterprises alike. Big4 discipline. Startup agility. One thread: making numbers tell the right story.</div>
+
+      <div class="cta-row">
+        <a href="#story" class="btn-primary"><i class="ti ti-book-2"></i> Read My Story</a>
+        <a href="#journey" class="btn-secondary"><i class="ti ti-route"></i> View Journey</a>
+      </div>
+
+      <div class="contact-pills">
+        <div class="pill"><i class="ti ti-mail"></i> thakurankit1003@gmail.com</div>
+        <div class="pill"><i class="ti ti-phone"></i> +91-7807169197</div>
+        <div class="pill"><i class="ti ti-map-pin"></i> Bengaluru, India</div>
+        <a href="https://www.linkedin.com/in/ankit-thakur-4702b415b/" target="_blank" rel="noopener" class="pill" style="text-decoration:none;"><i class="ti ti-brand-linkedin"></i> LinkedIn</a>
+      </div>
+    </div>
+
+    <a href="#story" class="scroll-ind">
+      <span>Scroll</span>
+      <i class="ti ti-chevron-down"></i>
+    </a>
+  </div>
+
+  <!-- Mini stats bar at bottom of landing -->
+  <div class="landing-stats">
+    <div class="lst"><div class="lst-num" id="s1">7+</div><div class="lst-lbl">Years experience</div></div>
+    <div class="lst"><div class="lst-num" id="s2">5</div><div class="lst-lbl">Companies</div></div>
+    <div class="lst"><div class="lst-num" id="s3">3</div><div class="lst-lbl">Countries</div></div>
+    <div class="lst"><div class="lst-num">B4</div><div class="lst-lbl">Big4 background</div></div>
+    <div class="lst"><div class="lst-num">6</div><div class="lst-lbl">Career chapters</div></div>
+  </div>
+
+</section>
+
+<!-- ═══════════════ MY STORY ═══════════════ -->
+<section id="story">
+  <div class="sec-wrap">
+    <div class="section-header"><i class="ti ti-user"></i> My story</div>
+
+    <div class="origin-card">
+      <div>
+        <div class="origin-label">The Beginning</div>
+        <div class="origin-headline" style="font-family:'Playfair Display',serif;font-size:24px;color:var(--purple-900);line-height:1.3;">Where it all started</div>
+      </div>
+      <div class="origin-text">
+        Started the CA articleship at 18 — three years of reconciling books, filing returns, and sitting across auditors who'd seen everything. Cleared the <strong>CA Final in November 2017</strong>, one of India's hardest professional exams. That was the foundation. Everything since has been building on it — from a Big4 audit floor in Bengaluru to a client site in <strong>Abu Dhabi</strong>, from Meesho's hypergrowth chaos to restating financials for a potential <strong>IPO at CHEP India</strong>. Today, as the <strong>first finance hire at ShopOS</strong>, the journey has come full circle — back to building from zero, this time with a decade of hard-won clarity.
+      </div>
+    </div>
+
+    <div class="stat-row">
+      <div class="stat"><div class="stat-num">7+</div><div class="stat-lbl">Years of experience</div></div>
+      <div class="stat"><div class="stat-num">5</div><div class="stat-lbl">Companies across sectors</div></div>
+      <div class="stat"><div class="stat-num">3</div><div class="stat-lbl">Countries worked in</div></div>
+      <div class="stat"><div class="stat-num">B4</div><div class="stat-lbl">Big4 audit background</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ MILESTONES ═══════════════ -->
+<section id="milestones">
+  <div class="sec-wrap">
+    <div class="section-header"><i class="ti ti-flag"></i> Key milestones</div>
+    <div class="milestones-scroll" id="milestonesScroll">
+      <div class="milestone"><div class="m-dot"></div><div class="m-year">2014</div><div class="m-text">Started CA articleship at J. S. Dua &amp; Co.</div></div>
+      <div class="milestone"><div class="m-dot"></div><div class="m-year">2017</div><div class="m-text">Cleared CA Final (ICAI) — November attempt</div></div>
+      <div class="milestone"><div class="m-dot blue"></div><div class="m-year">2018</div><div class="m-text">Joined KPMG India — Big4 career begins</div></div>
+      <div class="milestone"><div class="m-dot teal"></div><div class="m-year">2019</div><div class="m-text">Seconded to KPMG Abu Dhabi — UAE audit in-charge</div></div>
+      <div class="milestone"><div class="m-dot coral"></div><div class="m-year">2020</div><div class="m-text">Made the startup leap — joined Meesho</div></div>
+      <div class="milestone"><div class="m-dot coral"></div><div class="m-year">2021</div><div class="m-text">Led Ind AS implementation &amp; Oracle ERP rollout</div></div>
+      <div class="milestone"><div class="m-dot amber"></div><div class="m-year">2022</div><div class="m-text">Moved into Business Finance at Udaan</div></div>
+      <div class="milestone"><div class="m-dot teal"></div><div class="m-year">2023</div><div class="m-text">Joined CHEP India — IPO prep &amp; merger work</div></div>
+      <div class="milestone"><div class="m-dot teal"></div><div class="m-year">2024</div><div class="m-text">Led merger valuation &amp; capital reduction projects</div></div>
+      <div class="milestone"><div class="m-dot"></div><div class="m-year">2025</div><div class="m-text">First finance hire at ShopOS — building from scratch</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ JOURNEY ═══════════════ -->
+<section id="journey">
+  <div class="sec-wrap">
+    <div class="section-header"><i class="ti ti-route"></i> The journey</div>
+
+    <div class="chapter-card c-gray">
+      <div class="ch-bg-num">01</div>
+      <div class="ch-inner">
+        <div class="ch-top">
+          <div>
+            <div class="ch-num">Chapter 01 · Foundation</div>
+            <div class="ch-title">Learning the Fundamentals</div>
+            <div class="ch-co"><i class="ti ti-building"></i> J. S. Dua &amp; Co. &nbsp;·&nbsp; Article Assistant</div>
+          </div>
+          <div class="ch-period">Feb 2014 – Feb 2017</div>
+        </div>
+        <div class="ch-story">Three years of building the foundation. Every audit file, every tax return, every balance sheet reconciliation was a masterclass in precision. This is where the habit of getting things right — not just getting them done — was formed.</div>
+        <ul class="ch-highlights">
+          <li>Statutory &amp; internal audits, account finalization</li>
+          <li>Income Tax, Service Tax &amp; TDS return filing</li>
+          <li>Financial projections and replies to IT notices</li>
+          <li>Direct exposure to diverse client industries</li>
+        </ul>
+        <div class="ch-tags">
+          <span class="ctag g">Audit</span><span class="ctag g">Taxation</span><span class="ctag g">Compliance</span><span class="ctag g">Articleship</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="chapter-card c-blue">
+      <div class="ch-bg-num">02</div>
+      <div class="ch-inner">
+        <div class="ch-top">
+          <div>
+            <div class="ch-num">Chapter 02 · Big4 Era</div>
+            <div class="ch-title">The Big4 Standard</div>
+            <div class="ch-co"><i class="ti ti-building-skyscraper"></i> BSR &amp; Associates LLP (KPMG India) &nbsp;·&nbsp; Senior Executive, Audit</div>
+          </div>
+          <div class="ch-period">Apr 2018 – Nov 2020</div>
+        </div>
+        <div class="ch-story">KPMG sharpened everything. Audit methodology, client communication, international standards — Ind AS, IGAAP, IFRS. Then came the Abu Dhabi secondment: audit in-charge for international clients, a different timezone, a different pace. It opened the lens from India to the world.</div>
+        <ul class="ch-highlights">
+          <li>Statutory audits under Ind AS, IGAAP &amp; IFRS for listed &amp; unlisted companies</li>
+          <li>Seconded to KPMG Abu Dhabi — in-charge for MICCO Logistics &amp; Blue Lake Properties</li>
+          <li>Key clients: Wonderla Holidays, Meesho, Unacademy, Jumbotail</li>
+          <li>GDC US engagement exposure</li>
+        </ul>
+        <div class="ch-tags">
+          <span class="ctag b">Big4</span><span class="ctag b">Statutory Audit</span><span class="ctag t">UAE Secondment</span><span class="ctag b">IFRS</span><span class="ctag b">Ind AS</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="chapter-card c-coral">
+      <div class="ch-bg-num">03</div>
+      <div class="ch-inner">
+        <div class="ch-top">
+          <div>
+            <div class="ch-num">Chapter 03 · Startup Leap</div>
+            <div class="ch-title">From Audit to Operations</div>
+            <div class="ch-co"><i class="ti ti-rocket"></i> Meesho &nbsp;·&nbsp; Deputy Manager</div>
+          </div>
+          <div class="ch-period">Nov 2020 – Jun 2022</div>
+        </div>
+        <div class="ch-story">Left the structure of Big4 for the deliberate chaos of a hypergrowth startup. Speed replaced process. Led Ind AS implementation from scratch and rolled out Oracle ERP — the kind of work that either breaks you or makes you sharper. It made me sharper.</div>
+        <ul class="ch-highlights">
+          <li>Monthly MIS, Balance Sheet &amp; Cash Flows for management &amp; investors</li>
+          <li>Led Ind AS implementation across the organisation</li>
+          <li>Managed Oracle ERP rollout end-to-end</li>
+          <li>Statutory &amp; internal audit management; fixed asset register</li>
+        </ul>
+        <div class="ch-tags">
+          <span class="ctag c">Startup</span><span class="ctag c">Ind AS</span><span class="ctag c">Oracle ERP</span><span class="ctag">MIS Design</span><span class="ctag">Investor Reporting</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="chapter-card c-amber">
+      <div class="ch-bg-num">04</div>
+      <div class="ch-inner">
+        <div class="ch-top">
+          <div>
+            <div class="ch-num">Chapter 04 · Business Finance</div>
+            <div class="ch-title">Speaking the Language of Business</div>
+            <div class="ch-co"><i class="ti ti-chart-line"></i> Udaan &nbsp;·&nbsp; Senior Analyst, Business Finance</div>
+          </div>
+          <div class="ch-period">Jul 2022 – Feb 2023</div>
+        </div>
+        <div class="ch-story">Moved from pure accounting into business finance — tracking revenue targets, building leadership dashboards, sitting in rooms where commercial decisions get made. Finance stopped being a back-office function and became a front-row seat at the business table.</div>
+        <ul class="ch-highlights">
+          <li>Monthly sales, buyers &amp; revenue target tracking</li>
+          <li>Leadership dashboards on key business metrics</li>
+          <li>OPEX optimisation projects with cross-functional teams</li>
+        </ul>
+        <div class="ch-tags">
+          <span class="ctag a">Business Finance</span><span class="ctag a">Revenue Tracking</span><span class="ctag a">Dashboards</span><span class="ctag a">OPEX</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="chapter-card c-teal">
+      <div class="ch-bg-num">05</div>
+      <div class="ch-inner">
+        <div class="ch-top">
+          <div>
+            <div class="ch-num">Chapter 05 · Global Stage</div>
+            <div class="ch-title">IPO-Grade Work at Global Scale</div>
+            <div class="ch-co"><i class="ti ti-world"></i> CHEP India Pvt Ltd (Brambles Ltd, ASX listed) &nbsp;·&nbsp; Associate Finance Manager</div>
+          </div>
+          <div class="ch-period">Feb 2023 – Aug 2025</div>
+        </div>
+        <div class="ch-story">The most technically complex chapter yet. Restated financials for a DRHP under SEBI ICDR. Supported a full merger — chart of accounts, financial due diligence, goodwill computation. Multi-country close. The kind of work that demands everything you've built before it.</div>
+        <ul class="ch-highlights">
+          <li>Restated financials for DRHP under SEBI ICDR regulations</li>
+          <li>Merger support: chart of accounts, FDD, goodwill computation</li>
+          <li>Monthly close, P&amp;L and Cash Flow analysis (Record-to-Report)</li>
+          <li>Coordinated Big4 statutory &amp; group internal audits end-to-end</li>
+          <li>Merger, Valuation &amp; Capital Reduction projects</li>
+        </ul>
+        <div class="ch-tags">
+          <span class="ctag t">IPO Prep</span><span class="ctag t">SEBI ICDR</span><span class="ctag t">Merger</span><span class="ctag t">Multi-country</span><span class="ctag t">DRHP</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="chapter-card">
+      <div class="ch-bg-num">06</div>
+      <div class="ch-inner">
+        <div class="ch-top">
+          <div>
+            <div class="ch-num">Chapter 06 · Present</div>
+            <div class="ch-title">Building from Zero, Again</div>
+            <div class="ch-co"><i class="ti ti-building-community"></i> ShopOS &nbsp;·&nbsp; Lead Finance Associate &nbsp;·&nbsp; First Finance Hire</div>
+          </div>
+          <div class="ch-period">Sep 2025 – Present</div>
+        </div>
+        <div class="ch-story">Back to zero — by choice. The first finance hire at an AI-based startup means building everything from scratch: MIS frameworks, investor reporting, legal contracts, and the financial operating model the company will grow on. A decade of experience, distilled into what actually matters at the earliest stage.</div>
+        <ul class="ch-highlights">
+          <li>First finance hire — built end-to-end finance ops from zero</li>
+          <li>Designed company-wide MIS for management &amp; investor reporting</li>
+          <li>Primary investor SPOC; bridged founders and investors</li>
+          <li>Drafted &amp; managed legal &amp; commercial contracts (IP, NDA, confidentiality)</li>
+        </ul>
+        <div class="ch-tags">
+          <span class="ctag">AI Startup</span><span class="ctag">First Finance Hire</span><span class="ctag">MIS</span><span class="ctag t">Investor Relations</span><span class="ctag">Finance Ops</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════ SKILLS ═══════════════ -->
+<section id="skills">
+  <div class="sec-wrap">
+    <div class="section-header"><i class="ti ti-chart-bar"></i> Skills &amp; education</div>
+
+    <div class="bottom-grid">
+      <div class="card">
+        <div class="sec-label"><i class="ti ti-school"></i> Education</div>
+        <div class="edu-item">
+          <div class="edu-icon"><i class="ti ti-certificate"></i></div>
+          <div><div class="edu-deg">Chartered Accountant</div><div class="edu-sch">Institute of Chartered Accountants of India (ICAI)</div><div class="edu-meta">November 2017</div></div>
+        </div>
+        <div class="edu-item">
+          <div class="edu-icon"><i class="ti ti-building-community"></i></div>
+          <div><div class="edu-deg">Bachelor of Commerce (B.Com)</div><div class="edu-sch">Delhi University</div><div class="edu-meta">June 2015 &nbsp;·&nbsp; 60%</div></div>
+        </div>
+        <div class="edu-item">
+          <div class="edu-icon"><i class="ti ti-book"></i></div>
+          <div><div class="edu-deg">Class XII (CBSE)</div><div class="edu-sch">Central Board of Secondary Education</div><div class="edu-meta">March 2012 &nbsp;·&nbsp; 93%</div></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="sec-label"><i class="ti ti-chart-bar"></i> Core skills</div>
+        <div class="skill-group"><div class="skill-name"><span>Financial reporting &amp; analysis</span><span class="skill-pct">95%</span></div><div class="bar-bg"><div class="bar-fill" style="width:95%"></div></div></div>
+        <div class="skill-group"><div class="skill-name"><span>Statutory &amp; internal audit</span><span class="skill-pct">95%</span></div><div class="bar-bg"><div class="bar-fill teal" style="width:95%"></div></div></div>
+        <div class="skill-group"><div class="skill-name"><span>MIS framework design</span><span class="skill-pct">90%</span></div><div class="bar-bg"><div class="bar-fill" style="width:90%"></div></div></div>
+        <div class="skill-group"><div class="skill-name"><span>Ind AS / IGAAP / IFRS</span><span class="skill-pct">90%</span></div><div class="bar-bg"><div class="bar-fill coral" style="width:90%"></div></div></div>
+        <div class="skill-group"><div class="skill-name"><span>Investor &amp; mgmt reporting</span><span class="skill-pct">95%</span></div><div class="bar-bg"><div class="bar-fill teal" style="width:95%"></div></div></div>
+        <div class="skill-group"><div class="skill-name"><span>SAP &amp; Oracle ERP</span><span class="skill-pct">80%</span></div><div class="bar-bg"><div class="bar-fill blue" style="width:80%"></div></div></div>
+        <div class="skill-group"><div class="skill-name"><span>Budgeting &amp; demand planning</span><span class="skill-pct">85%</span></div><div class="bar-bg"><div class="bar-fill" style="width:85%"></div></div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="sec-label"><i class="ti ti-heart"></i> Beyond work</div>
+      <div class="int-row">
+        <div class="int-tag"><i class="ti ti-activity"></i> Yoga</div>
+        <div class="int-tag"><i class="ti ti-tools-kitchen-2"></i> Cooking</div>
+        <div class="int-tag"><i class="ti ti-book-2"></i> Book reading</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ CONNECT ═══════════════ -->
+<section id="connect">
+  <div class="sec-wrap">
+    <div class="section-header"><i class="ti ti-arrow-right"></i> What's next &amp; connect</div>
+
+    <div class="next-card">
+      <div>
+        <div class="next-eyebrow">The next chapter</div>
+        <div class="next-title" style="font-family:'Playfair Display',serif;">What's being written now</div>
+        <div class="next-text">Every chapter so far added something — Big4 rigour, startup speed, global exposure, the ability to build from zero. The next chapter is about scale: taking what's been built at ShopOS and growing it into a full finance function that can carry a company through its next phase of growth.</div>
+      </div>
+      <ul class="next-goals">
+        <li><strong>Scale ShopOS's finance function</strong> through fundraise and early growth</li>
+        <li><strong>Build the financial architecture</strong> for a venture-backed AI company</li>
+        <li>Deepen expertise in <strong>startup CFO responsibilities</strong></li>
+        <li>Explore the intersection of <strong>finance and AI</strong></li>
+      </ul>
+    </div>
+
+    <div class="connect-grid">
+      <a href="mailto:thakurankit1003@gmail.com" class="connect-card">
+        <div class="cc-icon"><i class="ti ti-mail"></i></div>
+        <div><div class="cc-label">Email</div><div class="cc-value">thakurankit1003@gmail.com</div></div>
+      </a>
+      <a href="tel:+917807169197" class="connect-card">
+        <div class="cc-icon"><i class="ti ti-phone"></i></div>
+        <div><div class="cc-label">Phone</div><div class="cc-value">+91-7807169197</div></div>
+      </a>
+      <div class="connect-card">
+        <div class="cc-icon"><i class="ti ti-map-pin"></i></div>
+        <div><div class="cc-label">Location</div><div class="cc-value">Bengaluru, India</div></div>
+      </div>
+      <a href="https://www.linkedin.com/in/ankit-thakur-4702b415b/" target="_blank" rel="noopener" class="connect-card">
+        <div class="cc-icon" style="background:var(--blue-50);border-color:var(--blue-400);"><i class="ti ti-brand-linkedin" style="color:var(--blue-400);"></i></div>
+        <div><div class="cc-label">LinkedIn</div><div class="cc-value">ankit-thakur-ca</div></div>
+      </a>
+    </div>
+
+    <div class="footer">Ankit Thakur &nbsp;·&nbsp; CA (ICAI) &nbsp;·&nbsp; thakurankit1003@gmail.com</div>
+  </div>
+</section>
+
+<script>
+(function () {
+
+  // ── Navbar: background on scroll ──
+  var navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', function () {
+    navbar.classList.toggle('scrolled', window.scrollY > 30);
+  }, { passive: true });
+
+  // ── Hamburger toggle ──
+  var navToggle = document.getElementById('navToggle');
+  var navLinksEl = document.getElementById('navLinks');
+  navToggle.addEventListener('click', function () {
+    navLinksEl.classList.toggle('open');
+    navToggle.classList.toggle('open');
+  });
+  navLinksEl.querySelectorAll('.nav-link').forEach(function (link) {
+    link.addEventListener('click', function () {
+      navLinksEl.classList.remove('open');
+      navToggle.classList.remove('open');
+    });
+  });
+
+  // ── Active nav link on scroll ──
+  var sections = document.querySelectorAll('section[id]');
+  var navLinks = document.querySelectorAll('.nav-link');
+  var secObserver = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        navLinks.forEach(function (l) {
+          l.classList.toggle('active', l.getAttribute('href') === '#' + entry.target.id);
+        });
+      }
+    });
+  }, { threshold: 0.35 });
+  sections.forEach(function (s) { secObserver.observe(s); });
+
+  // ── Skill bars: capture widths, reset ──
+  document.querySelectorAll('.bar-fill').forEach(function (bar) {
+    bar.dataset.w = bar.style.width || '0%';
+    bar.style.width = '0%';
+  });
+
+  // ── IntersectionObserver: reveal cards & chapter cards ──
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (!entry.isIntersecting) return;
+      var el = entry.target;
+      el.classList.add('in-view');
+      el.querySelectorAll('.bar-fill').forEach(function (bar, i) {
+        setTimeout(function () { bar.style.width = bar.dataset.w; }, 380 + i * 95);
+      });
+      io.unobserve(el);
+    });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('.card, .chapter-card, .next-card, .origin-card, .connect-card').forEach(function (el) {
+    io.observe(el);
+  });
+
+  // ── Milestone stagger ──
+  var mio = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (!entry.isIntersecting) return;
+      entry.target.querySelectorAll('.milestone').forEach(function (c, i) {
+        c.style.opacity = '0';
+        c.style.transform = 'translateY(14px)';
+        c.style.transition = 'opacity 0.45s ease, transform 0.45s ease';
+        setTimeout(function () { c.style.opacity = '1'; c.style.transform = 'translateY(0)'; }, i * 75);
+      });
+      mio.unobserve(entry.target);
+    });
+  }, { threshold: 0.1 });
+  var ms = document.getElementById('milestonesScroll');
+  if (ms) mio.observe(ms);
+
+  // ── Count-up for landing mini stats ──
+  function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
+  function countUp(el, target, suffix, duration) {
+    var start = performance.now();
+    (function frame(now) {
+      var p = easeOut(Math.min((now - start) / duration, 1));
+      el.textContent = Math.round(p * target) + suffix;
+      if (p < 1) requestAnimationFrame(frame);
+    })(start);
+  }
+  setTimeout(function () {
+    countUp(document.getElementById('s1'), 7, '+', 1200);
+    countUp(document.getElementById('s2'), 5, '',  1000);
+    countUp(document.getElementById('s3'), 3, '',  900);
+  }, 600);
+
+  // ── Hide scroll indicator after user scrolls ──
+  var scrollInd = document.querySelector('.scroll-ind');
+  window.addEventListener('scroll', function () {
+    if (scrollInd) scrollInd.style.opacity = window.scrollY > 80 ? '0' : '1';
+  }, { passive: true });
+
+})();
+</script>
+</body>
+</html>
